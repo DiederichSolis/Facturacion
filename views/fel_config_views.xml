@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="fel_config_view_form" model="ir.ui.view">
+        <field name="name">fel.config.form</field>
+        <field name="model">fel.config</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Configuración FEL">
+                        <field name="name"/>
+                        <field name="company_id"/>
+                        <field name="prefijo_factura"/>
+                    </group>
+                    
+                    <group string="Credenciales INFILE">
+                        <field name="infile_sign_key" password="True"/>
+                        <field name="infile_sign_user"/>
+                        <field name="infile_infile_user"/>
+                        <field name="infile_infile_key" password="True"/>
+                    </group>
+                    
+                    <group string="URLs Servicios">
+                        <field name="api_url"/>
+                        <field name="url_anulacion"/>
+                        <field name="sign_url"/>
+                    </group>
+                    
+                    <group string="Datos Emisor">
+                        <field name="infile_emitter_tax_id"/>
+                        <field name="infile_emitter_comname"/>
+                        <field name="infile_emitter_name"/>
+                        <field name="infile_emitter_email"/>
+                        <field name="infile_emitter_address"/>
+                        <field name="infile_emitter_zipcode"/>
+                        <field name="infile_emitter_city"/>
+                        <field name="infile_emitter_state"/>
+                        <field name="infile_tax_affilation"/>
+                        <field name="infile_establishment_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="fel_config_action" model="ir.actions.act_window">
+        <field name="name">Configuración FEL</field>
+        <field name="res_model">fel.config</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+    </record>
+
+    <menuitem id="menu_fel_config" 
+              name="Configuración FEL" 
+              parent="account.menu_account_config"
+              action="fel_config_action"
+              sequence="100"/>
+</odoo>

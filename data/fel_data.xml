@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="fel_config_default" model="fel.config">
+        <field name="name">Configuración FEL Principal</field>
+        <field name="api_url">https://certificador.feel.com.gt/fel/certificacion/v2/dte</field>
+        <field name="url_anulacion">https://certificador.feel.com.gt/fel/anulacion/v2/dte</field>
+        <field name="sign_url">https://www.example.com/firma</field>
+        <field name="prefijo_factura">FEL</field>
+        <field name="infile_tax_affilation">GEN</field>
+    </record>
+</odoo>
