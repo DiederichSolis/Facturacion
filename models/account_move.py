@@ -5,6 +5,7 @@ import requests
 import base64
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
+from lxml import etree
 
 _logger = logging.getLogger(__name__)
 
@@ -32,7 +33,23 @@ class AccountMove(models.Model):
         if not config:
             raise UserError(_('Configuración FEL no encontrada!'))
         return config
+    
+    def _validate_xml_structure(self, xml_content):
+        xsd_path = get_module_resource('fel_gt', 'data', 'dte.xsd')  # Archivo XSD oficial
+        schema = etree.XMLSchema(etree.parse(xsd_path))
+        xml = etree.fromstring(xml_content)
+        schema.assertValid(xml)  
 
+    def _get_certificate(self):
+        config = self._get_fel_config()
+        return {
+            'cert_pem': base64.b64decode(config.firma_digital).decode(),
+            'key_pem': base64.b64decode(config.llave_privada).decode(),
+        }
+    def _generate_qr_sat(self):
+        base_url = "https://verify.sat.gob.gt/verifyonlinev2/online/consulta"
+        return f"{base_url}?ambiente=1&uuid={self.fel_uuid}"
+        
     def _generate_fel_xml(self):
         self.ensure_one()
         config = self._get_fel_config()

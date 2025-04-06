@@ -2,10 +2,14 @@ from odoo import http
 from odoo.http import request
 import json
 import logging
+import hashlib
 
 _logger = logging.getLogger(__name__)
 
 class FelController(http.Controller):
+    def _generate_security_code(self, uuid, total, nit_emisor):
+        raw_code = f"{uuid}|{total}|{nit_emisor}"
+        return hashlib.sha256(raw_code.encode()).hexdigest()[:8]
 
     @http.route('/fel/get_factura', type='json', auth='user', methods=['POST'])
     def get_factura(self, **kwargs):

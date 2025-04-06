@@ -8,4 +8,10 @@
         <field name="prefijo_factura">FEL</field>
         <field name="infile_tax_affilation">GEN</field>
     </record>
+     
+     <record id="test_case_1" model="sat.test.case">
+        <field name="name">Caso 1 - Factura Normal</field>
+        <field name="xml_file">factura_normal.xml</field>
+        <field name="expected_result">certified</field>
+    </record>
 </odoo>

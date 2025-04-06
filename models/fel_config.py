@@ -30,8 +30,19 @@ class FelConfig(models.Model):
     
     # Configuración Adicional
     infile_tax_affilation = fields.Selection([
-        ('GEN', 'General'),
-        ('PEQ', 'Pequeño Contribuyente')], 
-        'Afiliación IVA', default='GEN')
+    ('GEN', 'General'),
+    ('PEQ', 'Pequeño Contribuyente'),
+    ('EXPORT', 'Exportador'),
+    ('AGRO', 'Régimen Agropecuario')], 
+    string='Régimen IVA', default='GEN')
     infile_establishment_id = fields.Char('Código Establecimiento', default='1')
     prefijo_factura = fields.Char('Prefijo Factura', default='FEL')
+
+    numeracion_autorizada = fields.Char(
+    string='Resolución SAT',
+    help="Ej: SAT-RES-2023-1234567890",
+    required=True 
+    )
+    rango_inicial = fields.Integer('Número Inicial Autorizado')
+    rango_final = fields.Integer('Número Final Autorizado')
+ 
