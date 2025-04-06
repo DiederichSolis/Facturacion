@@ -29,19 +29,21 @@ class FelConfig(models.Model):
     infile_emitter_email = fields.Char('Email Emisor', required=True)
     
     # Configuración Adicional
+   # Campo corregido:
     infile_tax_affilation = fields.Selection([
-    ('GEN', 'General'),
-    ('PEQ', 'Pequeño Contribuyente'),
-    ('EXPORT', 'Exportador'),
-    ('AGRO', 'Régimen Agropecuario')], 
-    string='Régimen IVA', default='GEN')
-    infile_establishment_id = fields.Char('Código Establecimiento', default='1')
-    prefijo_factura = fields.Char('Prefijo Factura', default='FEL')
+        ('GEN', 'General'),
+        ('PEQ', 'Pequeño Contribuyente'),
+        ('EXPORT', 'Exportador'),
+        ('AGRO', 'Régimen Agropecuario')], 
+        string='Régimen IVA', 
+        default='GEN'  # ← Parámetros alineados
+    )
 
+    # Indentación corregida:
     numeracion_autorizada = fields.Char(
-    string='Resolución SAT',
-    help="Ej: SAT-RES-2023-1234567890",
-    required=True 
+        string='Resolución SAT',
+        help="Ej: SAT-RES-2023-1234567890",
+        required=True  # ← Correctamente alineado
     )
     rango_inicial = fields.Integer('Número Inicial Autorizado')
     rango_final = fields.Integer('Número Final Autorizado')
